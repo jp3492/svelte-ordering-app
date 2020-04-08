@@ -24,6 +24,7 @@
     "jsqr": "^1.2.0",
     "mongoose": "^5.9.7",
     "polka": "next",
+    "qrcode": "^1.4.4",
     "qrious": "^4.0.2",
     "sirv": "^0.4.0"
   },
