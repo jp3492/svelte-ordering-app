@@ -1,0 +1,209 @@
+:root {
+	--cl-grey-dark: #616161;
+	--cl-grey: #9E9E9E;
+	--cl-grey-opace: #d2d2d2a1;
+	--cl-selected: #e8e7e7;
+	--cl-grey-light: #f4f4f4;
+	--cl-white-opace: #ffffffd9;
+	--cl-black-opace: rgba(0, 0, 0, 0.60);
+	--cl-green: #FFECB3;
+	--cl-red: #ffa9a2;
+	--cl-green: #b3d888;
+
+	--cl-background: #e4e4e16b;
+
+	--shadow-xl: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+	--shadow-l: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	--shadow-m: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	--shadow-m-w: 0 10px 20px rgba(255, 255, 255, 0.19), 0 6px 6px rgba(255, 255, 255, 0.23);
+	--shadow-s: 0 3px 6px rgba(0,0,0,0.16), 0 0px 4px rgba(0,0,0,0.23);
+	--shadow-s-m: 0 3px 6px rgba(255, 255, 255, 0.19), 0 0px 4px rgba(255, 255, 255, 0.19);
+	--shadow-xs: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+	--shadow-text-m: -15px 0 20px rgba(0, 0, 0, 0.4), 15px 0 20px rgba(0, 0, 0, 0.4), 0 15px 20px rgba(0, 0, 0, 0.4), 0 -15px 20px rgba(0, 0, 0, 0.4);
+	--shadow-text-xl: -25px 0 38px rgba(0, 0, 0, 0.4), 25px 0 38px rgba(0, 0, 0, 0.4), 0 25px 38px rgba(0, 0, 0, 0.4), 0 -25px 38px rgba(0, 0, 0, 0.4);
+
+	--shadow-white-around: 0 19px 38px #ffffff5c, 19px 0 38px #ffffff5c, 0 -19px 38px #ffffff5c, -19px 0 38px #ffffff5c;
+
+	--drop-shadow-s: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+
+	--speed-ease: cubic-bezier(0.4, 0.0, 0.2, 1);
+	--speed-dec-ease: cubic-bezier(0.0, 0.0, 0.2, 1);
+	--speed-acc-ease: cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: Cabin, sans-serif;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #333;
+}
+
+#sapper {
+	min-height: 100vh;
+	position: relative;
+}
+
+header {
+	padding: 0.5em 1em;
+	border-bottom: 1px solid lightgray;
+	min-height: 40px;
+	display: grid;
+
+align-content: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5em 0;
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+dl {
+	margin: 0;
+}
+
+dd {
+	margin: 0;
+}
+
+code {
+	font-family: menlo, inconsolata, monospace;
+	font-size: calc(1em - 2px);
+	color: #555;
+	background-color: #f0f0f0;
+	padding: 0.2em 0.4em;
+	border-radius: 2px;
+}
+
+@media (min-width: 400px) {
+	body {
+		font-size: 16px;
+	}
+}
+
+button {
+	padding: 0.8em 1em;
+	border: none;
+	background-color: var(--cl-selected);
+	box-shadow: var(--shadow-xs);
+	cursor: pointer;
+}
+button * {
+	cursor: pointer;
+}
+button.disabled {
+	pointer-events: none;
+	color: grey;
+	background-color: var(--cl-grey-light);
+	box-shadow: none;
+}
+
+form {
+	display: grid;
+	grid-gap: 10px;
+}
+
+fieldset {
+	border: none;
+	padding: 0;
+}
+
+label {
+	display: grid;
+	column-gap: 10px;
+	align-items: center;
+}
+
+label.label-checkbox {
+	grid-template-columns: max-content 1fr;
+	grid-auto-flow: column;
+	padding: 0 1em;
+}
+label.label-checkbox > p {
+	grid-row: 2 / 3;
+	grid-column: 1 / 3;
+}
+
+input {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+}
+
+input:disabled, textarea:disabled {
+	background-color: transparent;
+	color: inherit;
+}
+
+input, select, textarea {
+	border: none;
+	background-color: var(--cl-grey-light);
+	padding: 5px 10px;
+	margin: 0;
+	outline: none;
+}
+
+input, select {
+	height: 38px;
+}
+
+label > p {
+	height: 12px;
+	font-size: 80%;
+}
+label.invalid > input {
+	border: 1px solid red;
+}
+label.invalid > p {
+	color: red;
+}
+
+h1, h2, h3, h4, h5, h6, ul, p {
+	margin: 0;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.selected {
+	background-color: var(--cl-selected);
+}
+
+.loading,
+.no-items {
+	display: grid;
+	place-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-weight: 600;
+	text-align: center;
+}
+.no-items {
+	width: 250px;
+	margin: 0 auto;
+}
