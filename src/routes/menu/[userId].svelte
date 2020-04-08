@@ -45,6 +45,7 @@
   $: {
     if (setQr) {
       setQr(counters);
+      //
     }
   }
 
