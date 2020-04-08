@@ -3,17 +3,21 @@ import firebase from "firebase/app";
 import { isAuthenticated } from "../stores/auth";
 import "firebase/auth";
 
-const config = {
-  apiKey: "AIzaSyB_TcTOhn-7jStU9bAv67Rp_YVBZklRWiY",
-  authDomain: "testing-auth-c1e75.firebaseapp.com",
-  databaseURL: "https://testing-auth-c1e75.firebaseio.com",
-  projectId: "testing-auth-c1e75",
-  storageBucket: "testing-auth-c1e75.appspot.com",
-  messagingSenderId: "842231170614",
-  appId: "1:842231170614:web:6b2dc262797e8ff7de7a97"
-};
+export let initialized = false;
 
-export const initFirebase = () => firebase.initializeApp(config);
+export const initFirebase = async () => {
+  try {
+    await firebase.initializeApp(process.env.FIREBASE_CLIENT_CONFIG);
+    console.log("Firebase initialized");
+    initialized = true;
+
+  } catch (error) {
+    console.log(error);
+    console.log("Failed to initialize firebase");
+
+  }
+
+};
 
 const register = async ({ email, password }) => {
   try {

@@ -82,6 +82,14 @@
 </script>
 
 <style>
+  main {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1024px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+  }
   .header {
     padding: 1em;
   }
@@ -127,27 +135,30 @@
   }
 </style>
 
-<dl>
-  {#if loading}
-    <div class="loading">Loading menu...</div>
-  {:else if !$currentOrder.information._id}
-    <div class="no-item">No Menu found :(</div>
-  {:else}
-    <dd class="header">
-      <h1>{$currentOrder.information.name}</h1>
-      <p>{$currentOrder.information.description}</p>
-    </dd>
-    <MenuItems {counters} sections={$currentOrder.sections} />
-  {/if}
-</dl>
+<main>
+  <dl>
+    {#if loading}
+      <div class="loading">Loading menu...</div>
+    {:else if !$currentOrder.information._id}
+      <div class="no-item">No Menu found :(</div>
+    {:else}
+      <dd class="header">
+        <h1>{$currentOrder.information.name}</h1>
+        <p>{$currentOrder.information.description}</p>
+      </dd>
+      <MenuItems {counters} sections={$currentOrder.sections} />
+    {/if}
+  </dl>
 
-<div class="footer">
-  <a href="/search">
-    <img src="back.svg" height="10" alt="back to search" />
-  </a>
-  <a href={`menu/${userId}?showQr=true`} class="total">
-    <img src="scan.svg" alt="show qr code" height="30" />
-    <p>{`${total.items} Items`}</p>
-    <span>{`${total.price} €`}</span>
-  </a>
-</div>
+  <div class="footer">
+    <a href="/search">
+      <img src="back.svg" height="10" alt="back to search" />
+    </a>
+    <a href={`menu/${userId}?showQr=true`} class="total">
+      <img src="scan.svg" alt="show qr code" height="30" />
+      <p>{`${total.items} Items`}</p>
+      <span>{`${total.price} €`}</span>
+    </a>
+  </div>
+
+</main>

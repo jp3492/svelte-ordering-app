@@ -5,6 +5,8 @@
   import { stores } from "@sapper/app";
   import "firebase/auth";
 
+  import { initFirebase, initialized } from "../../services/auth";
+
   import { isAuthenticated } from "../../stores/auth";
 
   // will be used for redirect on not authenticated user for this route/segment
@@ -23,24 +25,27 @@
   });
 
   onMount(() => {
-    console.log(firebase);
-
-    firebase.auth().onAuthStateChanged(async user => {
-      if (user) {
-        user.getIdToken().then(async idToken => {
-          sendTokenToServer(idToken, "someCsrfToken");
-          isAuthenticated.update(value => true);
-          session.update(currentStore => ({ ...currentStore, user: user.uid }));
-        });
-      } else {
-        isAuthenticated.update(value => false);
-        session.update(currentStore => ({ ...currentStore, user: null }));
-        clearCookiesOnServer("someCsrfToken");
-        if (authenticated_routes.includes(segment)) {
-          goto("/auth/login");
+    if (initialized) {
+      firebase.auth().onAuthStateChanged(async user => {
+        if (user) {
+          user.getIdToken().then(async idToken => {
+            sendTokenToServer(idToken, "someCsrfToken");
+            isAuthenticated.update(value => true);
+            session.update(currentStore => ({
+              ...currentStore,
+              user: user.uid
+            }));
+          });
+        } else {
+          isAuthenticated.update(value => false);
+          session.update(currentStore => ({ ...currentStore, user: null }));
+          clearCookiesOnServer("someCsrfToken");
+          if (authenticated_routes.includes(segment)) {
+            goto("/auth/login");
+          }
         }
-      }
-    });
+      });
+    }
   });
 
   const clearCookiesOnServer = async csrfToken => {

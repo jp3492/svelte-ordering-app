@@ -12,7 +12,7 @@
 </script>
 
 <script>
-  import { tick } from "svelte";
+  import { tick, onMount } from "svelte";
   import QRious from "qrious";
 
   import { user, editUser } from "../../stores/user";
@@ -27,14 +27,24 @@
 
   let active = $currentOrder.length === 0;
 
+  const updateQr = id => {
+    const newQr = new QRious({
+      element: document.getElementById("qr"),
+      value: id
+    });
+  };
+
   user.subscribe(state => {
     values = state;
     initialValues = { ...values };
     if (state._id && state._id !== "") {
-      const newQr = new QRious({
-        element: document.getElementById("qr"),
-        value: state._id
-      });
+      updateQr(state._id);
+    }
+  });
+
+  onMount(() => {
+    if (values._id) {
+      updateQr(values._id);
     }
   });
 
@@ -169,9 +179,6 @@
     {/if}
     <div class="qr">
       <canvas id="qr" />
-      <!-- {#if qrUrl}
-        <img src={qrUrl} alt="qr code" />
-      {/if} -->
     </div>
     <div class="coordinates">
       <label>Coordinates</label>

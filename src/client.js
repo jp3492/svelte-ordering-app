@@ -48,10 +48,9 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
-initFirebase();
-
 sapper.start({
 	target: document.querySelector('#sapper')
-}).then(() => {
+}).then(async () => {
+	await initFirebase();
 	getUser();
 });

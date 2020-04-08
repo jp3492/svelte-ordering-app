@@ -21,6 +21,6 @@ export const post = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.status(404).send('Not found, sry, test this message later please');
+    res.status(404).send({ error });
   }
 }
