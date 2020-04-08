@@ -45,7 +45,7 @@
   $: {
     if (setQr) {
       setQr(counters);
-      //
+      //dd
     }
   }
 
