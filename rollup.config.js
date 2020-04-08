@@ -13,6 +13,10 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
+if (process.env.NODE_ENV === "development") {
+	require('dotenv').config();
+}
+
 export default {
 	client: {
 		input: config.client.input(),
@@ -20,7 +24,8 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				'process.env.FIREBASE_CLIENT_CONFIG': process.env.FIREBASE_CLIENT_CONFIG
 			}),
 			svelte({
 				dev,
@@ -64,7 +69,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				'process.env.MONGODB_URI': process.env.MONGODB_URI,
+				'process.env.FIREBASE_SERVICE_ACCOUNT': process.env.FIREBASE_SERVICE_ACCOUNT
 			}),
 			svelte({
 				generate: 'ssr',

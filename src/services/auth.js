@@ -10,13 +10,10 @@ export const initFirebase = async () => {
     await firebase.initializeApp(process.env.FIREBASE_CLIENT_CONFIG);
     console.log("Firebase initialized");
     initialized = true;
-
   } catch (error) {
     console.log(error);
     console.log("Failed to initialize firebase");
-
   }
-
 };
 
 const register = async ({ email, password }) => {

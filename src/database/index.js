@@ -6,8 +6,7 @@ if (process.env.NODE_ENV === "development") {
 
 export const connectDB = async () => {
   try {
-    // , autoIndex: false, for procution???
-    await mongoose.connect(process.env.MONGODB_URI ? process.env.MONGODB_URI : "something", { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect('process.env.MONGODB_URI', { useNewUrlParser: true, useUnifiedTopology: true });
     console.log("\x1b[32m", "MongoDb connected");
   } catch (error) {
     console.log({
