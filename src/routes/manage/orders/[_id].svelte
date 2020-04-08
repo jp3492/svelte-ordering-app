@@ -5,7 +5,6 @@
 </script>
 
 <script>
-  import QRCode from "qrcode";
   import { onMount, tick } from "svelte";
 
   import modal from "../../../stores/modal";
